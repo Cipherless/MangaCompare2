@@ -77,16 +77,16 @@ class ComparisonViewModel(application: Application) : AndroidViewModel(applicati
     private val _storageUsedBytes = MutableStateFlow(0L)
     val storageUsedBytes: StateFlow<Long> = _storageUsedBytes.asStateFlow()
 
-    // Auto-prune preference
-    private val _autoPruneEnabled = MutableStateFlow(true)
-    val autoPruneEnabled: StateFlow<Boolean> = _autoPruneEnabled.asStateFlow()
+    // Retention preference in days: 1, 3, 7, 14, 30, or -1 (Never / manual only)
+    private val _retentionDays = MutableStateFlow(7)
+    val retentionDays: StateFlow<Int> = _retentionDays.asStateFlow()
 
     init {
         refreshStorageUsage()
-        // Run auto-prune on startup if enabled
+        // Run auto-prune on startup if retention is configured
         viewModelScope.launch {
-            if (_autoPruneEnabled.value) {
-                repository.autoPrune(7)
+            if (_retentionDays.value > 0) {
+                repository.autoPrune(_retentionDays.value)
                 refreshStorageUsage()
             }
         }
@@ -255,11 +255,11 @@ class ComparisonViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun toggleAutoPrune(enabled: Boolean) {
-        _autoPruneEnabled.value = enabled
-        if (enabled) {
+    fun setRetentionDays(days: Int) {
+        _retentionDays.value = days
+        if (days > 0) {
             viewModelScope.launch {
-                repository.autoPrune(7)
+                repository.autoPrune(days)
                 refreshStorageUsage()
             }
         }

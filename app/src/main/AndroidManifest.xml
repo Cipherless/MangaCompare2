@@ -22,14 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Support sharing single image from Reikai or any app -->
+            <!-- Support sharing single image from any reader, browser, or gallery app -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
             </intent-filter>
 
-            <!-- Support sharing multiple images from Reikai or any app -->
+            <!-- Support sharing multiple images from any reader, browser, or gallery app -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />

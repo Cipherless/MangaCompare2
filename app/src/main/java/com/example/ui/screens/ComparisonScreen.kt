@@ -103,7 +103,7 @@ fun ComparisonScreen(
     val currentSessionId by viewModel.currentSessionId.collectAsStateWithLifecycle()
     val statusMessage by viewModel.statusMessage.collectAsStateWithLifecycle()
     val storageUsedBytes by viewModel.storageUsedBytes.collectAsStateWithLifecycle()
-    val autoPruneEnabled by viewModel.autoPruneEnabled.collectAsStateWithLifecycle()
+    val retentionDays by viewModel.retentionDays.collectAsStateWithLifecycle()
 
     // Dialog states
     var editingImageForNote by remember { mutableStateOf<ComparisonImage?>(null) }
@@ -374,7 +374,7 @@ fun ComparisonScreen(
                                             fontSize = 13.sp
                                         )
                                         Text(
-                                            text = "Return to Reikai, open the same chapter from another scanlation source, and Share to MangaCompare (or tap Paste) to start side-by-side comparison!",
+                                            text = "Open the same page from another source in your reader or browser, and Share to MangaCompare (or tap Paste) to start side-by-side comparison!",
                                             color = TextSecondary,
                                             fontSize = 12.sp
                                         )
@@ -438,8 +438,8 @@ fun ComparisonScreen(
     if (showStorageDialog) {
         StorageSettingsDialog(
             storageUsedBytes = storageUsedBytes,
-            autoPruneEnabled = autoPruneEnabled,
-            onToggleAutoPrune = { viewModel.toggleAutoPrune(it) },
+            retentionDays = retentionDays,
+            onSelectRetentionDays = { viewModel.setRetentionDays(it) },
             onClearAllData = { viewModel.clearAll() },
             onDismiss = { showStorageDialog = false }
         )
@@ -524,8 +524,8 @@ private fun EmptyComparisonState(
             ) {
                 StepItem(
                     step = "1",
-                    title = "Open Reikai (or browser)",
-                    desc = "Navigate to a chapter on Source A (e.g. MangaDex)."
+                    title = "Open reader or browser",
+                    desc = "Navigate to a page or chapter on Source A."
                 )
                 StepItem(
                     step = "2",
@@ -535,7 +535,7 @@ private fun EmptyComparisonState(
                 StepItem(
                     step = "3",
                     title = "Switch source & share again",
-                    desc = "Open the same page on Source B (e.g. Asura) -> Share again. It appends automatically!"
+                    desc = "Open the same page on Source B -> Share again. It appends automatically!"
                 )
             }
         }

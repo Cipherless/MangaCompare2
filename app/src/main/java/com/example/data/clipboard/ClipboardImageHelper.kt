@@ -20,7 +20,7 @@ class ClipboardImageHelper(private val context: Context) {
 
     fun getClipboardImage(): ClipboardResult {
         if (!clipboardManager.hasPrimaryClip()) {
-            return ClipboardResult.Error("Clipboard is empty. Copy an image in Reikai first.")
+            return ClipboardResult.Error("Clipboard is empty. Copy an image from your reader, browser, or gallery first.")
         }
 
         val clip = clipboardManager.primaryClip ?: return ClipboardResult.Error("No content on clipboard.")
@@ -67,6 +67,6 @@ class ClipboardImageHelper(private val context: Context) {
             }
         }
 
-        return ClipboardResult.Error("Clipboard does not contain an accessible image. Use 'Share' from Reikai or copy an image directly.")
+        return ClipboardResult.Error("Clipboard does not contain an accessible image. Use 'Share' from your reader or copy an image directly.")
     }
 }
