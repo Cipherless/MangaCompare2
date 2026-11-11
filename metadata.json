@@ -1,0 +1,6 @@
+{
+  "name": "MangaCompare",
+  "description": "Native Android manga and manhwa image comparison app with private internal storage, side-by-side and overlay slider modes, tall image support, and technical quality metrics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

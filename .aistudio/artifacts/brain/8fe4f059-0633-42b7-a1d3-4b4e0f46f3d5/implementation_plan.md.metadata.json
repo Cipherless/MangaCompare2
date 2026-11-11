@@ -1,0 +1,6 @@
+{
+  "summary":  "Revised implementation plan for MangaCompare: added explicit dedicated 'x' remove button on every comparison image header to allow instantly deleting single images from the active session and purging their private storage cache, in addition to the side-by-side, overlay slider, manhwa alignment, clipboard, and Room history features.",
+  "updatedAt":  "2026-11-10T23:55:49.501099982Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
